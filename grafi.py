@@ -19,6 +19,7 @@ profiles_file = "profiles.json"
 
 # Functions to load and save configurations
 def load_config():
+    """Load configuration file if exists, otherwise return an empty dictionary."""
     if os.path.exists(config_file):
         with open(config_file, "r") as f:
             return json.load(f)
@@ -26,12 +27,14 @@ def load_config():
 
 
 def save_config(config):
+    """Save the given config dictionary to the configuration file."""
     with open(config_file, "w") as f:
         json.dump(config, f, indent=4)
 
 
 # Functions to load and save profiles
 def load_profiles():
+    """Load profiles file if exists, otherwise return an empty dictionary."""
     if os.path.exists(profiles_file):
         with open(profiles_file, "r") as f:
             return json.load(f)
@@ -39,6 +42,7 @@ def load_profiles():
 
 
 def save_profiles(profiles):
+    """Save the given profiles dictionary to the profiles file."""
     with open(profiles_file, "w") as f:
         json.dump(profiles, f, indent=4)
 
@@ -59,6 +63,7 @@ status_file = os.path.join(des, "mod_status.txt")
 
 # Refresh the profile list in the UI
 def refresh_profile_list():
+    """Refresh the listbox showing all the profiles."""
     profile_listbox.delete(0, tk.END)
     profiles = load_profiles()
     for profile_name in profiles.keys():
@@ -67,6 +72,7 @@ def refresh_profile_list():
 
 # Load a profile
 def switch_profile(profile_name):
+    """Switch to the selected profile by copying its folders into the FiveM directory."""
     profiles = load_profiles()
     if profile_name not in profiles:
         messagebox.showerror("Error", "Profile not found.")
@@ -77,11 +83,13 @@ def switch_profile(profile_name):
     subfolders = ["citizen", "mods", "plugins"]
 
     try:
+        # Remove existing folders
         for folder in subfolders:
             dest_folder = os.path.join(destination, folder)
             if os.path.exists(dest_folder):
                 shutil.rmtree(dest_folder)
 
+        # Copy profile folders to the FiveM directory
         for folder in subfolders:
             source_folder = profile[folder]
             dest_folder = os.path.join(destination, folder)
@@ -96,12 +104,14 @@ def switch_profile(profile_name):
 
 # Set the current profile status
 def set_current_status(status):
+    """Set the status of the current profile."""
     with open(status_file, "w") as f:
         f.write(status)
 
 
 # Open the directory of the currently selected profile
 def open_profile_directory():
+    """Open the file explorer to the directory of the selected profile."""
     selected_profile = profile_listbox.get(tk.ACTIVE)
     profiles = load_profiles()
     if selected_profile in profiles:
@@ -116,6 +126,7 @@ def open_profile_directory():
 
 # Add a new profile
 def add_profile():
+    """Open a window to add a new profile."""
     profile_window = tk.Toplevel(root)
     profile_window.title("Add Profile")
     profile_window.configure(bg=BG_COLOR)
@@ -126,6 +137,7 @@ def add_profile():
     name_entry.grid(row=0, column=1, pady=5, padx=5)
 
     def create_profile_folders(profile_name):
+        """Create directory structure for a new profile."""
         profile_base_path = os.path.join(des, "profiles")
         os.makedirs(profile_base_path, exist_ok=True)
         profile_path = os.path.join(profile_base_path, profile_name)
@@ -136,6 +148,7 @@ def add_profile():
         return profile_path
 
     def save_profile():
+        """Save the new profile to the profiles file."""
         name = name_entry.get().strip()
         if not name:
             messagebox.showerror("Error", "Profile name is required.")
@@ -160,28 +173,69 @@ def add_profile():
         row=1, column=1, pady=10)
 
 
-# Remove a profile
 def remove_profile():
+    """Remove the selected profile and its directory after user confirmation."""
     selected = profile_listbox.curselection()
     if not selected:
-        messagebox.showwarning("Warning", "Select a profile to remove.")
+        messagebox.showwarning("Warning", "Please select a profile to remove.")
         return
+
     profiles = load_profiles()
     index = selected[0]
     profile_name = list(profiles.keys())[index]
-    confirm = messagebox.askyesno("Confirm", f"Are you sure you want to delete the profile '{profile_name}'?")
+    profile_path = profiles[profile_name]["path"]  # Percorso della cartella del profilo
+
+    # Conferma prima dell'eliminazione
+    confirm = messagebox.askyesno(
+        "Confirm",
+        f"Are you sure you want to delete the profile '{profile_name}' and its folder?"
+    )
     if not confirm:
         return
-    del profiles[profile_name]
-    save_profiles(profiles)
-    refresh_profile_list()
-    messagebox.showinfo("Success", f"The profile '{profile_name}' has been removed successfully.")
+
+    try:
+        # Elimina la cartella del profilo se esiste
+        if os.path.exists(profile_path):
+            shutil.rmtree(profile_path)  # Rimuove l'intera directory del profilo
+        else:
+            messagebox.showwarning("Warning", f"The directory for the profile '{profile_name}' does not exist.")
+
+        # Rimuove il profilo dal file dei profili
+        del profiles[profile_name]
+        save_profiles(profiles)
+        refresh_profile_list()  # Aggiorna la lista dei profili
+
+        messagebox.showinfo("Success", f"The profile '{profile_name}' and its folder have been successfully removed.")
+    except Exception as e:
+        messagebox.showerror("Error", f"An error occurred while removing the profile: {e}")
+
+def unload_profile():
+    """Unload the currently active profile by deleting its folders in the FiveM directory."""
+    subfolders = ["citizen", "mods", "plugins"]
+    destination = config["fivem_path"]
+
+    confirm = messagebox.askyesno(
+        "Confirm",
+        "Are you sure you want to unload the current profile? This will remove all mods from your FiveM directory."
+    )
+    if not confirm:
+        return
+
+    try:
+        for folder in subfolders:
+            dest_folder = os.path.join(destination, folder)
+            if os.path.exists(dest_folder):
+                shutil.rmtree(dest_folder)  # Rimuove l'intera directory
+        set_current_status("No profile loaded")  # Segna lo stato come "nessun profilo caricato"
+        messagebox.showinfo("Success", "The current profile has been unloaded successfully!")
+    except Exception as e:
+        messagebox.show
 
 
-# Main GUI
+# Main GUI setup
 root = tk.Tk()
-root.title("FiveM Graphic Switch")  # Updated title
-root.geometry("500x550")
+root.title("FiveM Graphic Switch")
+root.geometry("600x550")
 root.configure(bg=BG_COLOR)
 
 tk.Label(root, text="FiveM Graphic Switch", font=("Helvetica", 18, "bold"), bg=BG_COLOR, fg=LABEL_COLOR).pack(pady=10)
@@ -202,5 +256,8 @@ tk.Button(button_frame, text="Open Directory", command=open_profile_directory, f
           fg=BUTTON_TEXT_COLOR).grid(row=0, column=2, padx=5)
 tk.Button(button_frame, text="Remove Profile", command=remove_profile, font=FONT, bg=BUTTON_REMOVE_COLOR,
           fg=BUTTON_TEXT_COLOR).grid(row=0, column=3, padx=5)
+tk.Button(button_frame, text="Unload Profile", command=unload_profile, font=FONT, bg=BUTTON_REMOVE_COLOR,
+          fg=BUTTON_TEXT_COLOR).grid(row=0, column=4, padx=5)
+
 
 root.mainloop()
