@@ -1,1 +1,8 @@
-{}
+{
+    "brasileira": {
+        "path": "C:/Users/MICX/AppData/Local/FiveM/FiveM.app\\profiles\\brasileira",
+        "mods": "C:/Users/MICX/AppData/Local/FiveM/FiveM.app\\profiles\\brasileira\\mods",
+        "citizen": "C:/Users/MICX/AppData/Local/FiveM/FiveM.app\\profiles\\brasileira\\citizen",
+        "plugins": "C:/Users/MICX/AppData/Local/FiveM/FiveM.app\\profiles\\brasileira\\plugins"
+    }
+}
