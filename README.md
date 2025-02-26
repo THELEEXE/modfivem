@@ -6,7 +6,7 @@
 [![Tkinter](https://img.shields.io/badge/gui-Tkinter-informational?style=for-the-badge&logo=python)](https://wiki.python.org/moin/TkInter)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)](LICENSE)
 
----
+---   
 
 ## 📖 Description
 
