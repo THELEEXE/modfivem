@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modfivem.iml" filepath="$PROJECT_DIR$/.idea/modfivem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Fivem_graphics_switch.iml" filepath="$PROJECT_DIR$/.idea/Fivem_graphics_switch.iml" />
     </modules>
   </component>
 </project>
