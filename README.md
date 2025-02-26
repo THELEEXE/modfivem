@@ -22,22 +22,17 @@
 
 ## 📦 Installation
 
-Follow these steps to set up the project:
+Follow these steps to set up and run the program:
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yourusername/fivem-graphic-switch.git
-   ```
-2. **Install Python 3.10+**:
-   Make sure Python is installed. You can download it from [python.org](https://www.python.org/).
+1. **Download the Installer**:
+   - Go to the [Releases](https://github.com/yourusername/fivem-graphic-switch/releases) section of this repository.
+   - Download the latest version of the installer (`FiveM-Graphic-Switch-Installer.exe`).
 
-3. **Install required libraries**:
-   This project only uses Tkinter, which comes pre-installed with Python. No additional libraries are required.
+2. **Run the Installer**:
+   - Execute the downloaded file and follow the instructions to complete the installation.
 
-4. **Run the program**:
-   ```bash
-   python main.py
-   ```
+3. **Launch the Program**:
+   - After installation, run the program from the shortcut or the installation directory.
 
 ---
 
@@ -102,9 +97,9 @@ This project is licensed under the **MIT License**. Feel free to use, modify, an
 
 ## 💻 System Requirements
 
-- Python 3.10 or higher.
-- Tkinter library (included with Python).
-- Operating System: **Windows (required)**.
+- Windows OS (required).
+- No external Python dependencies (Tkinter is built-in).
+- Installer provided as `.exe` on the [Releases](https://github.com/yourusername/fivem-graphic-switch/releases) page.
 
 ---
 
