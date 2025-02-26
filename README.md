@@ -6,7 +6,7 @@
 [![Tkinter](https://img.shields.io/badge/gui-Tkinter-informational?style=for-the-badge&logo=python)](https://wiki.python.org/moin/TkInter)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)](LICENSE)
 
----   
+---
 
 ## 📖 Description
 
@@ -60,7 +60,10 @@ Click **Unload Profile** to remove the currently active graphic files from the F
 ---
 
 ## 🖼️ Interface Screenshot
-![Interface](https://via.placeholder.com/800x400?text=Your+program+interface+screenshot+goes+here)
+
+Below is how the **FiveM Graphic Switch** program interface looks:
+
+![Interface Screenshot](img.png)
 
 ---
 
