@@ -63,7 +63,7 @@ Click **Unload Profile** to remove the currently active graphic files from the F
 
 Below is how the **FiveM Graphic Switch** program interface looks:
 
-![Interface Screenshot](img.pn)
+![Interface Screenshot](img.png)
 
 ---
 
