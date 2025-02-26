@@ -24,16 +24,12 @@
 
 Follow these steps to set up and run the program:
 
-1. **Download the Installer**:
+1. **Download the Program**:
    - Go to the [Releases](https://github.com/yourusername/fivem-graphic-switch/releases) section of this repository.
-   - Download the latest version of the installer (`FiveM-Graphic-Switch-Installer.exe`).
+   - Download the latest version of the Program.
 
-2. **Run the Installer**:
-   - Execute the downloaded file and follow the instructions to complete the installation.
-
-3. **Launch the Program**:
-   - After installation, run the program from the shortcut or the installation directory.
-
+2. **Launch the Program**:
+   - After installation, run the program (FiveM_Graphics_Switch.exe)
 ---
 
 ## ✨ How to Use the Program
