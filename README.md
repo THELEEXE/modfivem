@@ -96,10 +96,7 @@ This project is licensed under the **MIT License**. Feel free to use, modify, an
 
 ## 💻 System Requirements
 
-- Windows OS (required).
-- No external Python dependencies (Tkinter is built-in).
-- Installer provided as `.exe` on the [Releases](https://github.com/yourusername/fivem-graphic-switch/releases) page.
-
+- Windows OS.
 ---
 
 ## 📢 Contact
