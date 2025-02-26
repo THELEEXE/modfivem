@@ -234,11 +234,11 @@ def unload_profile():
 
 # Main GUI setup
 root = tk.Tk()
-root.title("FiveM Graphic Switch")
+root.title("FiveM Graphics Switch")
 root.geometry("600x550")
 root.configure(bg=BG_COLOR)
 
-tk.Label(root, text="FiveM Graphic Switch", font=("Helvetica", 18, "bold"), bg=BG_COLOR, fg=LABEL_COLOR).pack(pady=10)
+tk.Label(root, text="FiveM Graphics Switch", font=("Helvetica", 18, "bold"), bg=BG_COLOR, fg=LABEL_COLOR).pack(pady=10)
 
 profile_listbox = tk.Listbox(root, height=15, width=50, font=FONT, bg="#3B3B3B", fg=LABEL_COLOR,
                              selectbackground=BUTTON_ACCENT_COLOR, selectforeground="white")
